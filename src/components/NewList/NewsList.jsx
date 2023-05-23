@@ -2,6 +2,7 @@ import React from 'react';
 import { getPosts } from '../../services/news-service';
 import './NewsList.scss';
 import { Link } from "react-router-dom";
+import Config from '../../Config';
 
 const NewsList = () => {
     const [posts, setPosts] = React.useState([]);
@@ -37,7 +38,7 @@ const NewsList = () => {
           <div className='container mt-3'>
              <h1 className='text-center'>News</h1>
              <div className='post-list'>
-                {posts.map((p,i) => <p key={p.id}>{(page-1) * pageSize + i + 1}. <Link to={'/' + p.id}>{p.title}</Link></p>)}
+                {posts.map((p,i) => <p key={p.id}>{(page-1) * pageSize + i + 1}. <Link to={Config().subRoute + '/' + p.id}>{p.title}</Link></p>)}
              </div>
              <nav aria-label="Page navigation example">
                 <ul className="pagination">
