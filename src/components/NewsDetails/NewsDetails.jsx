@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import './NewsDetails.scss';
 import Config from '../../Config';
 import messages from '../../messages/messages';
+import { injectIntl } from '@edx/frontend-platform/i18n';
 
-const NewsDetails = () => {
+const NewsDetails = (props) => {
     const [post, setPost] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
     const [hasError, setHasError] = React.useState(false);
@@ -19,7 +20,7 @@ const NewsDetails = () => {
        getPostById(Number(params.slug)).then(response => {
           console.log(response.data)
           setPost(response.data);
-          document.title = messages['News'] + ' | ' + response.data.title;
+          document.title = props.intl.formatMessage(messages['News']) + ' | ' + response.data.title;
           setLoading(false);
        }).catch(err => {
           setHasError(true);
@@ -38,12 +39,12 @@ const NewsDetails = () => {
     } else {
        return (
        <div className='container mt-3 details'>
-          <p><Link to={Config().subRoute}>&lt; {messages['News']}</Link></p>
+          <p><Link to={Config().subRoute}>&lt; {props.intl.formatMessage(messages['News'])}</Link></p>
           <h1>{post?.title}</h1>
           <p>{post?.body}</p>
-          {hasError && <div className='text-center'>{messages['Post not found']}.</div>}
+          {hasError && <div className='text-center'>{props.intl.formatMessage(messages['Post not found'])}.</div>}
        </div>)
     }
 }
 
-export default NewsDetails;
+export default injectIntl(NewsDetails);
