@@ -11,16 +11,16 @@ const axiosClient = axios.create({
 
 
 axiosClient.interceptors.response.use(
-function (response) {
-    return response;
-}, 
-function (error) {
-    let res = error.response;
-    if (res.status === 401) {
-    window.location.href = '/login';
+    function (response) {
+        return response;
+    }, 
+    function (error) {
+        let res = error.response;
+        if (res.status === 401) {
+        window.location.href = '/login';
+        }
+        return Promise.reject(error);
     }
-    return Promise.reject(error);
-}
 );
 
 

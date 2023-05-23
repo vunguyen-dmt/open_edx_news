@@ -1,9 +1,9 @@
 import axiosClient from "./apiClient";
 
-export function getPosts(page: number, limit: number){
+export const getPosts = (page, limit) => {
     return axiosClient.get(`/posts?_page=${page}&_limit=${limit}`);
 }
 
-export function getPostById(id: number){
+export const getPostById = (id) => {
     return axiosClient.get(`/posts/${id}`);
 }
