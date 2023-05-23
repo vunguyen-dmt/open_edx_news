@@ -13,12 +13,13 @@ import messages from './i18n';
 import ExamplePage from './example/ExamplePage';
 
 import './index.scss';
+import AppRoutes from './AppRoutes';
 
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider>
       <Header />
-      <ExamplePage />
+      <AppRoutes />
       <Footer />
     </AppProvider>,
     document.getElementById('root'),
