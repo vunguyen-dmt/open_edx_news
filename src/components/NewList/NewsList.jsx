@@ -1,5 +1,4 @@
 import React from 'react';
-import { memo } from "react";
 import { getPosts } from '../../services/news-service';
 import './NewsList.scss';
 import { Link } from "react-router-dom";
@@ -36,7 +35,7 @@ const NewsList = () => {
     } else {
        return (
           <div className='container mt-3'>
-             <div className='fw-bold'>Posts:</div>
+             <h1 className='text-center'>News</h1>
              <div className='post-list'>
                 {posts.map((p,i) => <p key={p.id}>{(page-1) * pageSize + i + 1}. <Link to={'/' + p.id}>{p.title}</Link></p>)}
              </div>
@@ -47,8 +46,8 @@ const NewsList = () => {
                       <span aria-hidden="true">Previous</span>
                       </a>
                    </li>
-                   <li className={page === 3 ?'page-item disabled' : 'page-item'}>
-                      <a className="page-link"  aria-disabled={page === 3 ? true : false} aria-label="Next" onClick={() => getNewPosts(Math.min(3,page + 1))}>
+                   <li className={page === 10 ?'page-item disabled' : 'page-item'}>
+                      <a className="page-link"  aria-disabled={page === 3 ? true : false} aria-label="Next" onClick={() => getNewPosts(Math.min(10,page + 1))}>
                       <span aria-hidden="true">Next</span>
                       </a>
                    </li>
@@ -59,4 +58,4 @@ const NewsList = () => {
     }
 }
 
-export default memo(NewsList);
+export default NewsList;

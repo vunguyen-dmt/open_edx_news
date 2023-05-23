@@ -12,8 +12,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 const AppRoutes = () => (
     <BrowserRouter>
       <Switch>
-            <Route exact path="/" component={NewsList} />
-            <Route path="/:slug" component={NewsDetails} />
+            <Route exact path="/news" component={NewsList} />
+            <Route path="news/:slug" component={NewsDetails} />
             <Route path="/notfound" component={NotFoundPage} />
             <Route path="*" component={NotFoundPage} />
         </Switch>
