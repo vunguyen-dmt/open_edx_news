@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import './NewsDetails.scss';
 import Config from '../../Config';
+import messages from '../../messages/messages';
 
 const NewsDetails = () => {
     const [post, setPost] = React.useState(null);
@@ -18,7 +19,7 @@ const NewsDetails = () => {
        getPostById(Number(params.slug)).then(response => {
           console.log(response.data)
           setPost(response.data);
-          document.title = 'News | ' + response.data.title;
+          document.title = messages['News'] + ' | ' + response.data.title;
           setLoading(false);
        }).catch(err => {
           setHasError(true);
@@ -37,10 +38,10 @@ const NewsDetails = () => {
     } else {
        return (
        <div className='container mt-3 details'>
-          <p><Link to={Config().subRoute}>&lt; News</Link></p>
+          <p><Link to={Config().subRoute}>&lt; {messages['News']}</Link></p>
           <h1>{post?.title}</h1>
           <p>{post?.body}</p>
-          {hasError && <div className='text-center'>Post not found.</div>}
+          {hasError && <div className='text-center'>{messages['Post not found']}.</div>}
        </div>)
     }
 }

@@ -3,6 +3,7 @@ import { getPosts } from '../../services/news-service';
 import './NewsList.scss';
 import { Link } from "react-router-dom";
 import Config from '../../Config';
+import messages from '../../messages/messages';
 
 const NewsList = () => {
     const [posts, setPosts] = React.useState([]);
@@ -12,7 +13,7 @@ const NewsList = () => {
     const pageSize = 10;
  
     React.useEffect(() => {
-      document.title = 'News';
+      document.title = messages['News'];
        getPosts(page, pageSize).then(response => {
           console.log(response);
           setPosts(response.data);
@@ -36,7 +37,7 @@ const NewsList = () => {
     } else {
        return (
           <div className='container mt-3'>
-             <h1 className='text-center'>News</h1>
+             <h1 className='text-center'>{messages['News']}</h1>
              <div className='post-list'>
                 {posts.map((p,i) => <p key={p.id}>{(page-1) * pageSize + i + 1}. <Link to={Config().subRoute + '/' + p.id}>{p.title}</Link></p>)}
              </div>
@@ -44,12 +45,12 @@ const NewsList = () => {
                 <ul className="pagination">
                    <li className={page === 1 ?'page-item disabled' : 'page-item'}>
                       <a className="page-link" aria-disabled={page === 1 ? true : false} aria-label="Previous" onClick={() => getNewPosts(Math.max(1,page - 1))}>
-                      <span aria-hidden="true">Previous</span>
+                      <span aria-hidden="true">{messages['Previous']}</span>
                       </a>
                    </li>
                    <li className={page === 10 ?'page-item disabled' : 'page-item'}>
                       <a className="page-link"  aria-disabled={page === 3 ? true : false} aria-label="Next" onClick={() => getNewPosts(Math.min(10,page + 1))}>
-                      <span aria-hidden="true">Next</span>
+                      <span aria-hidden="true">{messages['Next']}</span>
                       </a>
                    </li>
                 </ul>
